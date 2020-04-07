@@ -1,0 +1,22 @@
+2020-03-25 === [main] === INFO  === c.a.springboot.SpringBootConfig2ApplicationTests ==== Starting SpringBootConfig2ApplicationTests on AFOFB-608061252 with PID 6788 (started by Administrator in C:\Users\Administrator\Desktop\SpringBoot\spring-boot-config2\spring-boot-config2)
+2020-03-25 === [main] === DEBUG === c.a.springboot.SpringBootConfig2ApplicationTests ==== Running with Spring Boot v2.2.5.RELEASE, Spring v5.2.4.RELEASE
+2020-03-25 === [main] === INFO  === c.a.springboot.SpringBootConfig2ApplicationTests ==== No active profile set, falling back to default profiles: default
+2020-03-25 === [main] === INFO  === o.s.scheduling.concurrent.ThreadPoolTaskExecutor ==== Initializing ExecutorService 'applicationTaskExecutor'
+2020-03-25 === [main] === INFO  === c.a.springboot.SpringBootConfig2ApplicationTests ==== Started SpringBootConfig2ApplicationTests in 6.278 seconds (JVM running for 9.095)
+2020-03-25 === [main] === TRACE === c.a.springboot.SpringBootConfig2ApplicationTests ==== 这是trace日志
+2020-03-25 === [main] === DEBUG === c.a.springboot.SpringBootConfig2ApplicationTests ==== 这是debug日志
+2020-03-25 === [main] === INFO  === c.a.springboot.SpringBootConfig2ApplicationTests ==== 这是info日志
+2020-03-25 === [main] === WARN  === c.a.springboot.SpringBootConfig2ApplicationTests ==== 这是warn日志
+2020-03-25 === [main] === ERROR === c.a.springboot.SpringBootConfig2ApplicationTests ==== 这是debug日志
+2020-03-25 === [SpringContextShutdownHook] === INFO  === o.s.scheduling.concurrent.ThreadPoolTaskExecutor ==== Shutting down ExecutorService 'applicationTaskExecutor'
+2020-03-25 === [main] === INFO  === c.atguigu.springboot.SpringBootConfig2Application ==== Starting SpringBootConfig2Application on AFOFB-608061252 with PID 9492 (C:\Users\Administrator\Desktop\SpringBoot\spring-boot-config2\spring-boot-config2\target\classes started by Administrator in C:\Users\Administrator\Desktop\SpringBoot\spring-boot-config2\spring-boot-config2)
+2020-03-25 === [main] === DEBUG === c.atguigu.springboot.SpringBootConfig2Application ==== Running with Spring Boot v2.2.5.RELEASE, Spring v5.2.4.RELEASE
+2020-03-25 === [main] === INFO  === c.atguigu.springboot.SpringBootConfig2Application ==== No active profile set, falling back to default profiles: default
+2020-03-25 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ==== Tomcat initialized with port(s): 8081 (http)
+2020-03-25 === [main] === INFO  === org.apache.catalina.core.StandardService ==== Starting service [Tomcat]
+2020-03-25 === [main] === INFO  === org.apache.catalina.core.StandardEngine ==== Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-03-25 === [main] === INFO  === o.a.c.c.ContainerBase.[Tomcat].[localhost].[/chen] ==== Initializing Spring embedded WebApplicationContext
+2020-03-25 === [main] === INFO  === org.springframework.web.context.ContextLoader ==== Root WebApplicationContext: initialization completed in 7644 ms
+2020-03-25 === [main] === INFO  === o.s.scheduling.concurrent.ThreadPoolTaskExecutor ==== Initializing ExecutorService 'applicationTaskExecutor'
+2020-03-25 === [main] === INFO  === o.s.boot.web.embedded.tomcat.TomcatWebServer ==== Tomcat started on port(s): 8081 (http) with context path '/chen'
+2020-03-25 === [main] === INFO  === c.atguigu.springboot.SpringBootConfig2Application ==== Started SpringBootConfig2Application in 21.363 seconds (JVM running for 28.3)

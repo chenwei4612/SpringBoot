@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lms.dao.DepartmentMapper">
+  <resultMap id="BaseResultMap" type="com.chen.lms.bean.Department">
+    <id column="de_id" jdbcType="INTEGER" property="deId" />
+    <result column="de_name" jdbcType="VARCHAR" property="deName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    de_id, de_name
+  </sql>
+  <select id="selectByExample" parameterType="com.chen.lms.bean.DepartmentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from department
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from department
+    where de_id = #{deId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from department
+    where de_id = #{deId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chen.lms.bean.DepartmentExample">
+    delete from department
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chen.lms.bean.Department">
+    insert into department (de_id, de_name)
+    values (#{deId,jdbcType=INTEGER}, #{deName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chen.lms.bean.Department">
+    insert into department
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deId != null">
+        de_id,
+      </if>
+      <if test="deName != null">
+        de_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deId != null">
+        #{deId,jdbcType=INTEGER},
+      </if>
+      <if test="deName != null">
+        #{deName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chen.lms.bean.DepartmentExample" resultType="java.lang.Long">
+    select count(*) from department
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update department
+    <set>
+      <if test="record.deId != null">
+        de_id = #{record.deId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deName != null">
+        de_name = #{record.deName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update department
+    set de_id = #{record.deId,jdbcType=INTEGER},
+      de_name = #{record.deName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chen.lms.bean.Department">
+    update department
+    <set>
+      <if test="deName != null">
+        de_name = #{deName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where de_id = #{deId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chen.lms.bean.Department">
+    update department
+    set de_name = #{deName,jdbcType=VARCHAR}
+    where de_id = #{deId,jdbcType=INTEGER}
+  </update>
+    <!-- 2 统计部门信息 各部门人数-->
+  <resultMap id="CountResultMap" type="com.chen.lms.bean.Department">
+    <id column="de_id" jdbcType="VARCHAR" property="deId" />
+    <result column="de_name" jdbcType="VARCHAR" property="deName" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+  </resultMap>
+  <select id="selectByCN" parameterType="java.lang.String" resultMap="CountResultMap">
+    select de_name,count(emp_id) as num from department left join employee on dep_id=de_id group by de_id;
+  </select>
+</mapper>

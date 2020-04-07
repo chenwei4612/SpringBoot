@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lms.dao.OrstMapper">
+  <resultMap id="BaseResultMap" type="com.chen.lms.bean.Orst">
+    <result column="St_id" jdbcType="INTEGER" property="stId" />
+    <result column="Or_id" jdbcType="VARCHAR" property="orId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="ro_id" jdbcType="INTEGER" property="roId" />
+    <result column="car_id" jdbcType="INTEGER" property="carId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    St_id, Or_id, status, ro_id, car_id
+  </sql>
+  <select id="selectByExample" parameterType="com.chen.lms.bean.OrstExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orst
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.chen.lms.bean.OrstExample">
+    delete from orst
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chen.lms.bean.Orst">
+    insert into orst (St_id, Or_id, status, 
+      ro_id, car_id)
+    values (#{stId,jdbcType=INTEGER}, #{orId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{roId,jdbcType=INTEGER}, #{carId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chen.lms.bean.Orst">
+    insert into orst
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stId != null">
+        St_id,
+      </if>
+      <if test="orId != null">
+        Or_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="roId != null">
+        ro_id,
+      </if>
+      <if test="carId != null">
+        car_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stId != null">
+        #{stId,jdbcType=INTEGER},
+      </if>
+      <if test="orId != null">
+        #{orId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="roId != null">
+        #{roId,jdbcType=INTEGER},
+      </if>
+      <if test="carId != null">
+        #{carId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chen.lms.bean.OrstExample" resultType="java.lang.Long">
+    select count(*) from orst
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update orst
+    <set>
+      <if test="record.stId != null">
+        St_id = #{record.stId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orId != null">
+        Or_id = #{record.orId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roId != null">
+        ro_id = #{record.roId,jdbcType=INTEGER},
+      </if>
+      <if test="record.carId != null">
+        car_id = #{record.carId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update orst
+    set St_id = #{record.stId,jdbcType=INTEGER},
+      Or_id = #{record.orId,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      ro_id = #{record.roId,jdbcType=INTEGER},
+      car_id = #{record.carId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <!-- 2 统计 各线路订单情况-->
+  <resultMap id="ORstBaseResultMap" type="com.chen.lms.bean.Orst">
+    <result column="St_id" jdbcType="INTEGER" property="stId" />
+    <result column="Or_id" jdbcType="VARCHAR" property="orId" />
+    <result column="ro_id" jdbcType="INTEGER" property="roId" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+  </resultMap>
+  <select id="SelectORCount" parameterType="com.chen.lms.bean.OrstExample" resultMap="BaseResultMap">
+  	select ro_id , count(*) as num from orst group by ro_id
+  </select>
+   <select id="SelectORCount2" parameterType="com.chen.lms.bean.OrstExample" resultMap="BaseResultMap">
+  	select st_id,count(*) as num from orst group by st_id
+  </select>
+</mapper>

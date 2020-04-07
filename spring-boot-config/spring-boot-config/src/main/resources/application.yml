@@ -1,0 +1,31 @@
+server:
+  port: 8081
+spring:
+  profiles:
+    active: prod
+---
+server:
+  port: 8082
+spring:
+  profiles: dev
+---
+server:
+  port: 8083
+spring:
+  profiles: prod
+---
+#person:
+#  lastname: chenwei
+#  age: 21
+#  boss: true
+#  birth: 1997/03/03
+#  maps: {k1: v1,k2: 12}
+#  lists:
+#    - zhangsan
+#    - lisi
+#    - wangwu
+#    - zhaoliu
+#  dog:
+#    name: xiaobai
+#    age: 2
+---

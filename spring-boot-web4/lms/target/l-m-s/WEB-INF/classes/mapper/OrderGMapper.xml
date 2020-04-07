@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.lms.dao.OrderGMapper">
+  <resultMap id="BaseResultMap" type="com.chen.lms.bean.OrderG">
+    <id column="ord_id" jdbcType="VARCHAR" property="ordId" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="Rname" jdbcType="VARCHAR" property="rname" />
+    <result column="Rphone" jdbcType="VARCHAR" property="rphone" />
+    <result column="Raddress" jdbcType="VARCHAR" property="raddress" />
+    <result column="Sname" jdbcType="VARCHAR" property="sname" />
+    <result column="Sphone" jdbcType="VARCHAR" property="sphone" />
+    <result column="Saddress" jdbcType="VARCHAR" property="saddress" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.chen.lms.bean.OrderG">
+    <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ord_id, date, Rname, Rphone, Raddress, Sname, Sphone, Saddress
+  </sql>
+  <sql id="Blob_Column_List">
+    remark
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.chen.lms.bean.OrderGExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from orderg
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.chen.lms.bean.OrderGExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orderg
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from orderg
+    where ord_id = #{ordId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from orderg
+    where ord_id = #{ordId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chen.lms.bean.OrderGExample">
+    delete from orderg
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chen.lms.bean.OrderG">
+    insert into orderg (ord_id, date, Rname, 
+      Rphone, Raddress, Sname, 
+      Sphone, Saddress, remark
+      )
+    values (#{ordId,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, #{rname,jdbcType=VARCHAR}, 
+      #{rphone,jdbcType=VARCHAR}, #{raddress,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, 
+      #{sphone,jdbcType=VARCHAR}, #{saddress,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.chen.lms.bean.OrderG">
+    insert into orderg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ordId != null">
+        ord_id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="rname != null">
+        Rname,
+      </if>
+      <if test="rphone != null">
+        Rphone,
+      </if>
+      <if test="raddress != null">
+        Raddress,
+      </if>
+      <if test="sname != null">
+        Sname,
+      </if>
+      <if test="sphone != null">
+        Sphone,
+      </if>
+      <if test="saddress != null">
+        Saddress,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ordId != null">
+        #{ordId,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="rname != null">
+        #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="rphone != null">
+        #{rphone,jdbcType=VARCHAR},
+      </if>
+      <if test="raddress != null">
+        #{raddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null">
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sphone != null">
+        #{sphone,jdbcType=VARCHAR},
+      </if>
+      <if test="saddress != null">
+        #{saddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chen.lms.bean.OrderGExample" resultType="java.lang.Long">
+    select count(*) from orderg
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update orderg
+    <set>
+      <if test="record.ordId != null">
+        ord_id = #{record.ordId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rname != null">
+        Rname = #{record.rname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rphone != null">
+        Rphone = #{record.rphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.raddress != null">
+        Raddress = #{record.raddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sname != null">
+        Sname = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sphone != null">
+        Sphone = #{record.sphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saddress != null">
+        Saddress = #{record.saddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update orderg
+    set ord_id = #{record.ordId,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=VARCHAR},
+      Rname = #{record.rname,jdbcType=VARCHAR},
+      Rphone = #{record.rphone,jdbcType=VARCHAR},
+      Raddress = #{record.raddress,jdbcType=VARCHAR},
+      Sname = #{record.sname,jdbcType=VARCHAR},
+      Sphone = #{record.sphone,jdbcType=VARCHAR},
+      Saddress = #{record.saddress,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update orderg
+    set ord_id = #{record.ordId,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=VARCHAR},
+      Rname = #{record.rname,jdbcType=VARCHAR},
+      Rphone = #{record.rphone,jdbcType=VARCHAR},
+      Raddress = #{record.raddress,jdbcType=VARCHAR},
+      Sname = #{record.sname,jdbcType=VARCHAR},
+      Sphone = #{record.sphone,jdbcType=VARCHAR},
+      Saddress = #{record.saddress,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chen.lms.bean.OrderG">
+    update orderg
+    <set>
+      <if test="date != null">
+        date = #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="rname != null">
+        Rname = #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="rphone != null">
+        Rphone = #{rphone,jdbcType=VARCHAR},
+      </if>
+      <if test="raddress != null">
+        Raddress = #{raddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null">
+        Sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="sphone != null">
+        Sphone = #{sphone,jdbcType=VARCHAR},
+      </if>
+      <if test="saddress != null">
+        Saddress = #{saddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ord_id = #{ordId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.chen.lms.bean.OrderG">
+    update orderg
+    set date = #{date,jdbcType=VARCHAR},
+      Rname = #{rname,jdbcType=VARCHAR},
+      Rphone = #{rphone,jdbcType=VARCHAR},
+      Raddress = #{raddress,jdbcType=VARCHAR},
+      Sname = #{sname,jdbcType=VARCHAR},
+      Sphone = #{sphone,jdbcType=VARCHAR},
+      Saddress = #{saddress,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where ord_id = #{ordId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chen.lms.bean.OrderG">
+    update orderg
+    set date = #{date,jdbcType=VARCHAR},
+      Rname = #{rname,jdbcType=VARCHAR},
+      Rphone = #{rphone,jdbcType=VARCHAR},
+      Raddress = #{raddress,jdbcType=VARCHAR},
+      Sname = #{sname,jdbcType=VARCHAR},
+      Sphone = #{sphone,jdbcType=VARCHAR},
+      Saddress = #{saddress,jdbcType=VARCHAR}
+    where ord_id = #{ordId,jdbcType=VARCHAR}
+  </update>
+  <!-- 2 统计订单信息 按year和month-->
+  <resultMap id="OCountResultMap" type="com.chen.lms.bean.OrderG">
+    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+  </resultMap>
+  <select id="selectByOCN" parameterType="java.lang.String" resultMap="OCountResultMap">
+    select YEAR(date) as date,count(*) as num from orderg group by YEAR(date)
+ </select>
+ <select id="selectByOCN2" parameterType="java.lang.String" resultMap="OCountResultMap">
+    select MONTH(date) as date,count(*) as num from orderg group by MONTH(date)
+ </select>
+</mapper>
